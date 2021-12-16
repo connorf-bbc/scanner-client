@@ -30,7 +30,7 @@ class KtorScannerClient : ScannerClient {
         }
     }
 
-    private val clientScope = CoroutineScope(Dispatchers.Default)
+    private val clientScope = CoroutineScope(DefaultDispatcher)
 
     override fun getContent(callback: (List<Content>) -> Unit) {
         clientScope.launch {
