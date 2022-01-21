@@ -12,3 +12,5 @@ This is a 10% time project.
   SMP-AN integration has been tested (and works) on a local branch. Kotlin version
   dependency will need to be discussed (currenlty needs 1.5, could go down to 1.4).
   Next work should be to add individual content access methods to ScannerClient interface.
+- 21/01/22: Add cocoapods plugin. Integrating local cocoapod in smp-ios has been tested on
+  a local branch.

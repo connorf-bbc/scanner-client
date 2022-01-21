@@ -7,9 +7,10 @@ buildscript {
 
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.multiplatform' version "${kotlin_version}"
 
+    id 'org.jetbrains.kotlin.multiplatform' version "${kotlin_version}"
     id 'org.jetbrains.kotlin.plugin.serialization' version "${kotlin_version}"
+    id 'org.jetbrains.kotlin.native.cocoapods' version "${kotlin_version}"
 
     id 'maven-publish'
 }
@@ -34,12 +35,11 @@ kotlin {
     android {
         publishLibraryVariants("release")
     }
-    iosArm64 {
-        binaries {
-            framework {
-                baseName = 'library'
-            }
-        }
+    ios()
+    cocoapods {
+        summary = "Scanner Client"
+        homepage = "https://github.com/connorf-bbc/scanner-client"
+        frameworkName = "ScannerClient"
     }
 
     sourceSets {
@@ -73,13 +73,11 @@ kotlin {
                 implementation 'junit:junit:4.13'
             }
         }
-        iosArm64Main {
+        
+        iosMain {
             dependencies {
                 implementation "io.ktor:ktor-client-ios:$ktor_version"
             }
-        }
-        iosArm64Test {
-
         }
     }
 }
