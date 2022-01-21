@@ -157,8 +157,15 @@ data class RmsResponse(
             @SerialName("competition_warning")
             val competitionWarning: Boolean? = null,
             @SerialName("warnings")
-            val warnings: String? = null
-        )
+            val warnings: Warnings? = null
+        ) {
+
+            @Serializable
+            data class Warnings(
+                @SerialName("short")
+                val short: String? = null
+            )
+        }
 
         @Serializable
         data class Network(
