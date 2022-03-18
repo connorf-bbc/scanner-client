@@ -1,13 +1,13 @@
-package uk.co.bbc.model
+package uk.co.bbc.scannerclient.model
 
-import uk.co.bbc.model.response.TrevorResponse
-import uk.co.bbc.model.response.IblResponse as iPlayerDto
-import uk.co.bbc.model.response.IblResponse.GroupEpisodes.Element as iPlayerEpisodeDto
-import uk.co.bbc.model.response.IblResponse.GroupEpisodes.Element.Version as iPlayerVersionDto
-import uk.co.bbc.model.response.RmsResponse as SoundsDto
-import uk.co.bbc.model.response.RmsResponse.Data as SoundsPlayableItemDto
-import uk.co.bbc.model.response.NitroResponse as LiveDto
-import uk.co.bbc.model.response.NitroResponse.Nitro.Results.Item as LivePlayableItemDto
+import uk.co.bbc.scannerclient.model.response.TrevorResponse
+import uk.co.bbc.scannerclient.model.response.IblResponse as iPlayerDto
+import uk.co.bbc.scannerclient.model.response.IblResponse.GroupEpisodes.Element as iPlayerEpisodeDto
+import uk.co.bbc.scannerclient.model.response.IblResponse.GroupEpisodes.Element.Version as iPlayerVersionDto
+import uk.co.bbc.scannerclient.model.response.RmsResponse as SoundsDto
+import uk.co.bbc.scannerclient.model.response.RmsResponse.Data as SoundsPlayableItemDto
+import uk.co.bbc.scannerclient.model.response.NitroResponse as LiveDto
+import uk.co.bbc.scannerclient.model.response.NitroResponse.Nitro.Results.Item as LivePlayableItemDto
 
 sealed class Content {
     abstract val title: String
@@ -107,7 +107,7 @@ sealed class Content {
     ) : Content() {
         companion object {
             fun fromDto(dto: SoundsDto): List<SoundsContent> =
-                dto.data.map(::fromDto)
+                dto.data.map(Companion::fromDto)
 
             private fun fromDto(playableItem: SoundsPlayableItemDto): SoundsContent =
                 SoundsContent(
@@ -131,7 +131,7 @@ sealed class Content {
     ) : Content() {
         companion object {
             fun fromDto(dto: LiveDto): List<LiveContent> =
-                dto.nitro.results.items.mapNotNull(::fromDto)
+                dto.nitro.results.items.mapNotNull(Companion::fromDto)
 
             private fun fromDto(playableItem: LivePlayableItemDto): LiveContent? {
                 val pid = playableItem.availableWebcasts?.version?.firstOrNull()?.pid ?: return null

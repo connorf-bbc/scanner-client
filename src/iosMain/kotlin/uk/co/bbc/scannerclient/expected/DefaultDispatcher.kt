@@ -1,4 +1,4 @@
-package uk.co.bbc
+package uk.co.bbc.scannerclient.expected
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Runnable

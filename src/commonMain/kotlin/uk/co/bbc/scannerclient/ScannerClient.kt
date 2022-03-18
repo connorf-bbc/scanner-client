@@ -1,4 +1,4 @@
-package uk.co.bbc
+package uk.co.bbc.scannerclient
 
 import io.ktor.client.*
 import io.ktor.client.features.json.*
@@ -6,14 +6,14 @@ import io.ktor.client.features.json.serializer.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import uk.co.bbc.model.Content
-import uk.co.bbc.model.response.IblResponse
-import uk.co.bbc.model.response.NitroResponse
-import uk.co.bbc.model.response.RmsResponse
-import uk.co.bbc.model.response.TrevorResponse
+import uk.co.bbc.scannerclient.expected.DefaultDispatcher
+import uk.co.bbc.scannerclient.model.Content
+import uk.co.bbc.scannerclient.model.response.IblResponse
+import uk.co.bbc.scannerclient.model.response.NitroResponse
+import uk.co.bbc.scannerclient.model.response.RmsResponse
+import uk.co.bbc.scannerclient.model.response.TrevorResponse
 import kotlinx.serialization.json.Json as KotlinxJson
 
 interface ScannerClient {

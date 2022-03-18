@@ -1,4 +1,4 @@
-package uk.co.bbc.model.response
+package uk.co.bbc.scannerclient.model.response
 
 
 import kotlinx.serialization.SerialName
