@@ -6,7 +6,7 @@ import io.ktor.http.*
 import uk.co.bbc.scannerclient.model.Content
 import uk.co.bbc.scannerclient.model.response.RmsResponse
 
-class SoundsService(private val httpClient: HttpClient) : ScannerService {
+internal class SoundsService(private val httpClient: HttpClient) : ScannerService {
     private val url =
         Url("https://rms.api.bbc.co.uk/v2/programmes/playable?category=music-rockandindie&sort=-available_from_date")
 

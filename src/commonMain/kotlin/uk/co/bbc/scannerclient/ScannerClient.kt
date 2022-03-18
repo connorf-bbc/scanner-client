@@ -8,20 +8,20 @@ import uk.co.bbc.scannerclient.expected.DefaultDispatcher
 import uk.co.bbc.scannerclient.model.Content
 import uk.co.bbc.scannerclient.services.ScannerService
 
-interface ScannerClient {
-    fun getContent(type: ContentType, callback: (List<Content>) -> Unit)
-    fun close()
+public interface ScannerClient {
+    public fun getContent(type: ContentType, callback: (List<Content>) -> Unit)
+    public fun close()
 
-    enum class ContentType {
+    public enum class ContentType {
         iPlayer, Sounds, News, NewsVertical, Video
     }
 
-    companion object {
-        val singleton = KtorScannerClient()
+    public companion object {
+        public val singleton: ScannerClient = KtorScannerClient()
     }
 }
 
-class KtorScannerClient(
+internal class KtorScannerClient(
     private val httpClient: HttpClient = DI.httpClient,
     private val contentServices: Map<ScannerClient.ContentType, ScannerService> = DI.contentServices
 ) : ScannerClient {

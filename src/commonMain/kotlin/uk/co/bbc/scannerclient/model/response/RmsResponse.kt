@@ -3,7 +3,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RmsResponse(
+internal data class RmsResponse(
     @SerialName("data")
     val data: List<Data> = emptyList(),
     @SerialName("limit")

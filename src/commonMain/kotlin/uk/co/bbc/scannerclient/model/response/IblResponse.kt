@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class IblResponse(
+internal data class IblResponse(
     @SerialName("group_episodes")
     val groupEpisodes: GroupEpisodes,
     @SerialName("schema")

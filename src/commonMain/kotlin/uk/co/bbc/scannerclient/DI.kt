@@ -11,7 +11,7 @@ import uk.co.bbc.scannerclient.services.NewsService.Orientation.VERTICAL
 import uk.co.bbc.scannerclient.services.SoundsService
 import uk.co.bbc.scannerclient.services.iPlayerService
 
-object DI {
+internal object DI {
     val httpClient = HttpClient {
         install(JsonFeature) {
             serializer = KotlinxSerializer(kotlinx.serialization.json.Json {

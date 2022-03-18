@@ -8,7 +8,7 @@ import uk.co.bbc.scannerclient.model.response.TrevorResponse
 import uk.co.bbc.scannerclient.services.NewsService.Orientation.HORIZONTAL
 import uk.co.bbc.scannerclient.services.NewsService.Orientation.VERTICAL
 
-class NewsService(
+internal class NewsService(
     private val httpClient: HttpClient,
     orientation: Orientation
 ) : ScannerService {

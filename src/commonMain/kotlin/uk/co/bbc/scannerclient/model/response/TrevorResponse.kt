@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TrevorResponse(
+internal data class TrevorResponse(
     @SerialName("allowAdvertising")
     val allowAdvertising: Boolean? = null,
     @SerialName("analytics")

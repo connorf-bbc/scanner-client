@@ -6,7 +6,7 @@ import io.ktor.http.*
 import uk.co.bbc.scannerclient.model.Content
 import uk.co.bbc.scannerclient.model.response.NitroResponse
 
-class LiveService(private val httpClient: HttpClient) : ScannerService {
+internal class LiveService(private val httpClient: HttpClient) : ScannerService {
     private val url =
         Url("https://programmes.api.bbc.com/nitro/api/programmes?api_key=L9oibgX6CJpFCltEkDHcXWxxHXE2cLCI&availability=available&availability_type=webcast&mixin=available_webcasts&page_size=50")
 

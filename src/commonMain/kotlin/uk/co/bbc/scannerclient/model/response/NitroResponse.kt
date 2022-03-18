@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class NitroResponse(
+internal data class NitroResponse(
     @SerialName("nitro")
     val nitro: Nitro
 ) {

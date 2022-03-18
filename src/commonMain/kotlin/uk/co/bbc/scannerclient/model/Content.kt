@@ -9,14 +9,14 @@ import uk.co.bbc.scannerclient.model.response.RmsResponse.Data as SoundsPlayable
 import uk.co.bbc.scannerclient.model.response.NitroResponse as LiveDto
 import uk.co.bbc.scannerclient.model.response.NitroResponse.Nitro.Results.Item as LivePlayableItemDto
 
-sealed class Content {
-    abstract val title: String
-    abstract val subtitle: String?
-    abstract val vpid: String
-    abstract val avType: String
-    abstract val isLive: Boolean
+public sealed class Content {
+    public abstract val title: String
+    public abstract val subtitle: String?
+    public abstract val vpid: String
+    public abstract val avType: String
+    public abstract val isLive: Boolean
 
-    data class iPlayerContent(
+    public data class iPlayerContent(
         override val title: String,
         override val subtitle: String?,
         override val vpid: String,
@@ -28,7 +28,7 @@ sealed class Content {
         val duration: String,
         val image: String
     ) : Content() {
-        companion object {
+        internal companion object {
             fun fromDto(dto: iPlayerDto): List<iPlayerContent> =
                 dto.groupEpisodes.elements
                     .flatMap { episode ->
@@ -55,7 +55,7 @@ sealed class Content {
         }
     }
 
-    data class NewsContent(
+    public data class NewsContent(
         override val title: String,
         override val subtitle: String?,
         override val vpid: String,
@@ -65,7 +65,7 @@ sealed class Content {
         var clipID: String,
         var iChefUrl: String
     ) : Content() {
-        companion object {
+        internal companion object {
             fun fromDto(dto: TrevorResponse): List<NewsContent> {
                 val flattenedRelations = dto.relations.flatMap { it.allChildRelations() }
 
@@ -97,7 +97,7 @@ sealed class Content {
         }
     }
 
-    data class SoundsContent(
+    public data class SoundsContent(
         override val title: String,
         override val subtitle: String?,
         override val vpid: String,
@@ -105,7 +105,7 @@ sealed class Content {
         override val isLive: Boolean,
         var episodeID: String
     ) : Content() {
-        companion object {
+        internal companion object {
             fun fromDto(dto: SoundsDto): List<SoundsContent> =
                 dto.data.map(Companion::fromDto)
 
@@ -121,7 +121,7 @@ sealed class Content {
         }
     }
 
-    data class LiveContent(
+    public data class LiveContent(
         override val title: String,
         override val subtitle: String?,
         override val vpid: String,
@@ -129,7 +129,7 @@ sealed class Content {
         override val isLive: Boolean,
         var episodeID: String
     ) : Content() {
-        companion object {
+        internal companion object {
             fun fromDto(dto: LiveDto): List<LiveContent> =
                 dto.nitro.results.items.mapNotNull(Companion::fromDto)
 
@@ -148,7 +148,7 @@ sealed class Content {
         }
     }
 
-    companion object {
+    internal companion object {
         fun String.toSizedImageUrl(): String =
             replace(IMAGE_SIZE_TEMPLATE, IMAGE_SIZE_TARGET)
 
