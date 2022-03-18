@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlin_version = '1.5.32'
+        kotlin_version = '1.6.10'
         ktor_version = '1.6.8'
     }
 }
@@ -36,11 +36,6 @@ kotlin {
         publishLibraryVariants("release")
     }
     ios()
-    cocoapods {
-        summary = "Scanner Client"
-        homepage = "https://github.com/connorf-bbc/scanner-client"
-        frameworkName = "ScannerClient"
-    }
 
     sourceSets {
         commonMain {
@@ -79,6 +74,13 @@ kotlin {
                 implementation "io.ktor:ktor-client-ios:$ktor_version"
             }
         }
+    }
+
+    cocoapods {
+        summary = "Scanner Client"
+        homepage = "https://github.com/connorf-bbc/scanner-client"
+        ios.deploymentTarget = "11.3"
+        podfile = project.file("/Users/fordc02/dev/ios/smp-ios/Podfile")
     }
 }
 

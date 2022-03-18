@@ -7,11 +7,11 @@ Pod::Spec.new do |spec|
     spec.license                  = ''
     spec.summary                  = 'Scanner Client'
 
-    spec.vendored_frameworks      = "build/cocoapods/framework/ScannerClient.framework"
+    spec.vendored_frameworks      = "build/cocoapods/framework/scanner_client.framework"
     spec.libraries                = "c++"
     spec.module_name              = "#{spec.name}_umbrella"
 
-                
+    spec.ios.deployment_target = '11.3'
 
                 
 
@@ -32,13 +32,10 @@ Pod::Spec.new do |spec|
                 fi
                 set -ev
                 REPO_ROOT="$PODS_TARGET_SRCROOT"
-                "$REPO_ROOT/../../../../../private/var/folders/y4/5zhzhd_90xzcjsssv50fl8f40000gn/T/wrap16093loc/gradlew" -p "$REPO_ROOT" $KOTLIN_PROJECT_PATH:syncFramework \
+                "$REPO_ROOT/../../../../../private/var/folders/y4/5zhzhd_90xzcjsssv50fl8f40000gn/T/wrap7314loc/gradlew" -p "$REPO_ROOT" $KOTLIN_PROJECT_PATH:syncFramework \
                     -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME \
                     -Pkotlin.native.cocoapods.archs="$ARCHS" \
-                    -Pkotlin.native.cocoapods.configuration=$CONFIGURATION \
-                    -Pkotlin.native.cocoapods.cflags="$OTHER_CFLAGS" \
-                    -Pkotlin.native.cocoapods.paths.headers="$HEADER_SEARCH_PATHS" \
-                    -Pkotlin.native.cocoapods.paths.frameworks="$FRAMEWORK_SEARCH_PATHS"
+                    -Pkotlin.native.cocoapods.configuration=$CONFIGURATION
             SCRIPT
         }
     ]
