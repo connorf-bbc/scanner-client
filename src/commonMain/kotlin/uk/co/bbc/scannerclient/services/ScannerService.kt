@@ -6,3 +6,4 @@ interface ScannerService {
     @Throws(Throwable::class)
     suspend fun getContent(): List<Content>
 }
+

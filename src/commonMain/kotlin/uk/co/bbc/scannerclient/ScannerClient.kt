@@ -1,49 +1,38 @@
 package uk.co.bbc.scannerclient
 
 import io.ktor.client.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import uk.co.bbc.scannerclient.expected.DefaultDispatcher
 import uk.co.bbc.scannerclient.model.Content
-import uk.co.bbc.scannerclient.services.LiveService
-import uk.co.bbc.scannerclient.services.NewsService
-import uk.co.bbc.scannerclient.services.SoundsService
-import uk.co.bbc.scannerclient.services.iPlayerService
-import kotlinx.serialization.json.Json as KotlinxJson
+import uk.co.bbc.scannerclient.services.ScannerService
 
 interface ScannerClient {
-    fun getContent(callback: (List<Content>) -> Unit)
+    fun getContent(type: ContentType, callback: (List<Content>) -> Unit)
     fun close()
+
+    enum class ContentType {
+        iPlayer, Sounds, News, NewsVertical, Video
+    }
+
+    companion object {
+        val singleton = KtorScannerClient()
+    }
 }
 
-class KtorScannerClient : ScannerClient {
-    private val httpClient = HttpClient {
-        install(JsonFeature) {
-            serializer = KotlinxSerializer(KotlinxJson {
-                ignoreUnknownKeys = true
-            })
-        }
-    }
+class KtorScannerClient(
+    private val httpClient: HttpClient = DI.httpClient,
+    private val contentServices: Map<ScannerClient.ContentType, ScannerService> = DI.contentServices
+) : ScannerClient {
 
     private val clientScope = CoroutineScope(DefaultDispatcher)
 
-    private val contentServices = listOf(
-        iPlayerService(httpClient),
-        SoundsService(httpClient),
-        NewsService(httpClient),
-        LiveService(httpClient)
-    )
-
-    override fun getContent(callback: (List<Content>) -> Unit) {
+    override fun getContent(type: ScannerClient.ContentType, callback: (List<Content>) -> Unit) {
         clientScope.launch {
-            val content = contentServices.flatMap {
-                it.getContent()
-            }
-
-            callback(content)
+            contentServices[type]
+                ?.getContent()
+                ?.let(callback)
         }
     }
 
