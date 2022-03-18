@@ -16,7 +16,8 @@ plugins {
 }
 
 group = 'uk.co.bbc'
-version = '0.0.1-SNAPSHOT'
+def commitCount = ['sh', '-c', 'git rev-list HEAD | wc -l | tr -d " "'].execute().text.trim()
+version = "0.0.1-dev.$commitCount-SNAPSHOT"
 
 repositories {
     google()
@@ -62,7 +63,7 @@ kotlin {
         }
         androidMain {
             dependencies {
-                implementation "io.ktor:ktor-client-cio:$ktor_version"
+                implementation "io.ktor:ktor-client-okhttp:$ktor_version"
             }
         }
         androidTest {
